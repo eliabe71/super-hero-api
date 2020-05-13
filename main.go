@@ -1,8 +1,7 @@
 package main
 import (
-	"fmt"
-	"app/conection"
+	"api/controllers"
 ) 
 func main (){
-
+	controllers.POST()
 }

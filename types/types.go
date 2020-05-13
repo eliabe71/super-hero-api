@@ -39,7 +39,10 @@ type Image struct {
 	Url string `json:"url"`
 }
 type Response struct{
-	Response  string      `json:"response"`
+	Response  string   `json:"response"`
+}
+type NameAux struct{
+	NameAux     string `json:"name"`
 }
 type SuperAndVilan struct {
 	Name             string `json:"name"`
@@ -48,11 +51,9 @@ type SuperAndVilan struct {
 	Intelligence     string `json:"intelligence"`
 	Power            string `json:"power"`
 	Occupation       string `json:"occupation"`
-	Image            string `json:"image"`
 	GroupAffiliation string `json:"groupAffiliation"`
 	Relatives        string `json:"relatives"`
 	Uuid        	 uint32      `json:"id"`
-	Name         	 string      `json:"name""`
 	Powerstats  	 Powerstats  `json:"powerstats""`
 	Biography   	 Biography   `json:"biography"`
 	Appearance 	 	 Appearance  `json:"appearance"`
