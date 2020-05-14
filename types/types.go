@@ -41,19 +41,14 @@ type Image struct {
 type Response struct{
 	Response  string   `json:"response"`
 }
+
+/// Tipo auxiliar para requisiçao do json em conections
 type NameAux struct{
 	NameAux     string `json:"name"`
 }
 type SuperAndVilan struct {
-	Name             string `json:"name"`
-	FullName         string `json:"fullname"`
-	Alignment        string `json:"alignment"`
-	Intelligence     string `json:"intelligence"`
-	Power            string `json:"power"`
-	Occupation       string `json:"occupation"`
-	GroupAffiliation string `json:"groupAffiliation"`
-	Relatives        string `json:"relatives"`
-	Uuid        	 uint32      `json:"id"`
+	Name             string 	`json:"name"`
+	Uuid        	 string     `json:"id"`
 	Powerstats  	 Powerstats  `json:"powerstats""`
 	Biography   	 Biography   `json:"biography"`
 	Appearance 	 	 Appearance  `json:"appearance"`
