@@ -39,7 +39,7 @@ func searchId (name string, nameAux types.NameAux) (string) {
 		}
 		//VERIFICA SE OS NOMES SÃO IGUAIS 
 		if strings.ToLower(nameAux.NameAux) == strings.ToLower(name) {
-			fmt.Println(strings.ToLower(nameAux.NameAux)+" = "+ strings.ToLower(name))
+			//fmt.Println(strings.ToLower(nameAux.NameAux)+" = "+ strings.ToLower(name))
 			if db.VerifyId(id){
 				fmt.Println("voltando")
 				i++
