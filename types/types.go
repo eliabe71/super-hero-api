@@ -1,5 +1,20 @@
-//ok
 package types
+// Tipo usado para salvar na requisção http
+type SuperAndVillains struct {
+	Response string 	`json:"response"`
+	Result_for string	`json:"results-for"`
+	Results []Results 	`json:"results"`
+}
+type Results struct{
+	Id 			string  	`json:"id"`
+	Name 		string 		`json:"name"`
+	Powerstats  Powerstats 	`json:"powerstats"`
+	Biography   Biography 	`json:"biography"`
+	appearance  Appearance 	`json:"appearance"`
+	Work 		Work		`json:"Work"`
+	Connections Connections `json:"conections"`
+	Image 		Image 		`json:"image"`
+}
 type Powerstats struct {
 	Intelligence string `json:"intelligence"`
 	Strength     string `json:"strength"`
@@ -38,22 +53,3 @@ type Connections struct {
 type Image struct {
 	Url string `json:"url"`
 }
-type Response struct{
-	Response  string   `json:"response"`
-}
-
-/// Tipo auxiliar para requisiçao do json em conections
-type NameAux struct{
-	NameAux     string `json:"name"`
-}
-type SuperAndVilan struct {
-	Name             string 	`json:"name"`
-	Uuid        	 string     `json:"id"`
-	Powerstats  	 Powerstats  `json:"powerstats""`
-	Biography   	 Biography   `json:"biography"`
-	Appearance 	 	 Appearance  `json:"appearance"`
-	Work          	 Work        `json:"work"`
-	Connections   	 Connections `json:"connections"`
-	Image          	 Image       `json:"image"`
-}
-
