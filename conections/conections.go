@@ -6,8 +6,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	//"strings"
-	//"github.com/emirpasic/gods/trees/avltree"
 	"api/db"
 )
 
@@ -45,7 +43,7 @@ func POST() {
 	var super types.SuperAndVillains
 	//  atribuindo os valor de bodyJson a estrutura do tipo data
 	json.Unmarshal(bodyJson, &super)
-
+	/// Garante que o numero de ids e supers adquiridos da API online não sejam nulos
 	if super.Response == "error" {
 		// Fechando o pacote json
 		response.Body.Close()
@@ -61,8 +59,9 @@ func POST() {
 	for i:=0; i<len(super.Results);i++{
 		ids = append(ids,super.Results[i].Id)
 	}
+	fmt.Println(ids)
 	if db.Saving(ids, &super){
-		fmt.Println("Seria Cadrastado")
+		fmt.Println("ENTRY")
 	}
 	response.Body.Close()
 }

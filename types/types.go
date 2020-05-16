@@ -10,7 +10,7 @@ type Results struct{
 	Name 		string 		`json:"name"`
 	Powerstats  Powerstats 	`json:"powerstats"`
 	Biography   Biography 	`json:"biography"`
-	appearance  Appearance 	`json:"appearance"`
+	Appearance  Appearance 	`json:"appearance"`
 	Work 		Work		`json:"Work"`
 	Connections Connections `json:"conections"`
 	Image 		Image 		`json:"image"`
