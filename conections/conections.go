@@ -53,15 +53,40 @@ func POST() {
 		return
 	}
 	fmt.Println("Villain/Super Available for registration")
-
+	fmt.Println(super.Results[0].Connections.GroupAffiliation)
 	fmt.Println("Loading .")
 	ids := make([]string,0)
 	for i:=0; i<len(super.Results);i++{
 		ids = append(ids,super.Results[i].Id)
 	}
 	fmt.Println(ids)
-	if db.Saving(ids, &super){
+	/*if db.Saving(ids, &super){
 		fmt.Println("ENTRY")
-	}
+	}*/
 	response.Body.Close()
+}
+func GET(who string) []types.Get {
+	var nameOrId string
+	if who == "search"{
+		fmt.Println("type 1 if you are looking for the ID or 2 if you are looking for the name")
+		fmt.Scanln(&nameOrId)
+		if nameOrId == "1"{
+			fmt.Println("type the id")
+			fmt.Scanln(&nameOrId)
+			log := db.SearchSuperId(nameOrId)	
+			fmt.Println(len(log))
+			return	log
+		}
+		//if nameOrId == "2"{
+		//	fmt.Println("type the Name")
+		//	fmt.Scanln(&nameOrId)
+	//		return	db.SearchSuper(nameOrId)
+	//	} 
+	}
+	supers := db.SearchSuperTable(who)
+	for i:=0 ; i<len(supers);i++{
+		fmt.Print(supers[i].Name+" Id: ")
+		fmt.Println(supers[i].Id)
+	}
+	return supers
 }

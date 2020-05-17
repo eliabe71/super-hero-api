@@ -12,7 +12,7 @@ type Results struct{
 	Biography   Biography 	`json:"biography"`
 	Appearance  Appearance 	`json:"appearance"`
 	Work 		Work		`json:"Work"`
-	Connections Connections `json:"conections"`
+	Connections Connections `json:"connections"`
 	Image 		Image 		`json:"image"`
 }
 type Powerstats struct {
@@ -52,4 +52,19 @@ type Connections struct {
 }
 type Image struct {
 	Url string `json:"url"`
+}
+type Get struct{
+	Id 			 	 string
+	Name 			 string `json:"name"`
+	FullName 	 	 string
+	Intelligence 	 string
+	Power 		 	 string
+	Occupation 	 	 string
+	Image 		 	 string
+	GroupAffiliation string
+	Relatives 	 	 string
+	NumberOfRelatives int	
+}
+type Id struct {
+  Id int `json:"idsuper"`
 }

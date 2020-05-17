@@ -5,8 +5,8 @@ import (
   "database/sql"
   "fmt"
   "github.com/lib/pq"
-  //"errors"
   "strconv"
+  "strings"
 )
 
 const (
@@ -18,6 +18,7 @@ const (
   tableMain     = "super"
   tableHeroes   = "heroes"
   tableVillains = "villains"
+  allSupers     = "allsupers"
 )
 
 // usado para receber json dos id's apenas uso interno
@@ -36,10 +37,6 @@ func existTable(db *sql.DB, nameTable string) bool {
   return true
 }
 
-type id struct {
-  Id int `json:"idsuper"`
-}
-
 func createSpecificTables(db *sql.DB) {
   if !existTable(db, tableHeroes) {
     _, err := db.Exec("CREATE TABLE " + tableHeroes + " (" +
@@ -55,6 +52,15 @@ func createSpecificTables(db *sql.DB) {
       "villainid serial primary key," +
       "name varchar(10000) not null," +
       "idsuper integer references super(idsuper)" + ")")
+    if err != nil {
+      panic(err)
+    }
+  }
+  if !existTable(db, allSupers) {
+  _, err := db.Exec("CREATE TABLE " + allSupers + " (" +
+    "allid serial primary key," +
+    "name varchar(10000) not null," +
+    "idsuper integer references super(idsuper)" + ")")
     if err != nil {
       panic(err)
     }
@@ -219,6 +225,7 @@ func addInDb(db *sql.DB, super *types.SuperAndVillains, posResponse int) {
   if err != nil {
     panic(err)
   }
+  fmt.Println(super.Results[posResponse].Connections.GroupAffiliation)
   fmt.Println("Connections")
   _, err = db.Exec(`INSERT INTO image (idsuper,url) VALUES ($1,$2)`, convertIntId, super.Results[posResponse].Image.Url)
   if err != nil {
@@ -231,15 +238,28 @@ func addInDb(db *sql.DB, super *types.SuperAndVillains, posResponse int) {
     if err != nil {
       panic(err)
     }
+    _, err = db.Exec(`INSERT INTO allSupers (idsuper,name) VALUES ($1,$2)`, convertIntId, super.Results[posResponse].Name)
+    if err != nil {
+      panic(err)
+    }
     fmt.Println("heroes")
   case "bad":
     _, err = db.Exec(`INSERT INTO villains (idsuper,name) VALUES ($1,$2)`, convertIntId, super.Results[posResponse].Name)
+   if err != nil {
+      panic(err)
+    }
+    _, err = db.Exec(`INSERT INTO  allsupers (idsuper,name) VALUES ($1,$2)`, convertIntId, super.Results[posResponse].Name)
 
     if err != nil {
       panic(err)
     }
     fmt.Println("villains")
   default:
+    _, err = db.Exec(`INSERT INTO allsupers(idsuper,name) VALUES ($1,$2)`, convertIntId, super.Results[posResponse].Name)
+
+    if err != nil {
+      panic(err)
+    }
   }
 }
 
@@ -266,6 +286,7 @@ func Saving(idConection []string, super *types.SuperAndVillains) bool {
     panic(err)
   }
   db := initServer()
+  defer db.Close()
   fmt.Println("Verify your server")
   //se a tablea não existir cria tabela
   //stringTables := [7]string{"powerstats", "biography", "appearance", "work", "connections", "image", "super"}
@@ -283,7 +304,6 @@ func Saving(idConection []string, super *types.SuperAndVillains) bool {
     return true
   }
   fmt.Println("table exist")
-  defer db.Close()
   // Vendo os id gravados para ver se poderemos salvar o super com id especificado
   records, err := db.Query("SELECT idsuper FROM super")
   if err != nil {
@@ -297,7 +317,7 @@ func Saving(idConection []string, super *types.SuperAndVillains) bool {
     panic(err)
   }
   records, err = db.Query("SELECT idsuper FROM super")
-  var id id
+  var id types.Id
   fmt.Println("Next() different null")
   for records.Next(){
      fmt.Println("Aqui")
@@ -322,4 +342,93 @@ func Saving(idConection []string, super *types.SuperAndVillains) bool {
     }
   }
   return false
+}
+
+///Retronar um vetor vazio caso dê algum erro
+// procura por tabelas
+func SearchSuperTable(who string ) []types.Get{
+  db := initServer()
+  defer db.Close()
+  records, err := db.Query("SELECT name, idsuper FROM "+who)
+  if err!= nil{
+      fmt.Println("Hero search error")
+      return []types.Get{}
+  }
+  if !records.Next(){
+      return []types.Get{}
+  }
+  records, err = db.Query("SELECT name, idsuper FROM "+who)
+  if err!= nil{
+      fmt.Println("Hero search error")
+      return []types.Get{}
+  }
+  var super types.Get
+  dataSuper := make([]types.Get,0)
+  for records.Next(){
+       erroScan := records.Scan(&super.Name,&super.Id)
+       if erroScan != nil{
+          continue
+       }
+       super.FullName = "-"
+       super.Intelligence = "-"
+       super.Power = "-"
+       super.Occupation ="-"
+       super.Image = "-"  
+       super.GroupAffiliation="-" 
+       super.Relatives = "-"
+       super.NumberOfRelatives = -1 
+       fmt.Println(super.Id)
+       dataSuper = append(dataSuper,super)
+  }
+  return dataSuper
+}
+func SearchSuperId(Id string)[]types.Get {
+    db := initServer()
+    defer db.Close()
+    id,_ := strconv.Atoi(Id)
+    records , err := db.Query(`SELECT name FROM super WHERE idsuper =$1`,id)
+    if err!= nil {
+      fmt.Println(err.Error())
+      return []types.Get{}
+    }
+    //fmt.Println("Aqui")
+    var super types.Get
+    super.Id = Id
+    if records.Next(){
+      //fmt.Println("Aqui2")
+      erroScan := records.Scan(&super.Name)
+      fmt.Println(super.Name)
+      if erroScan!= nil{
+        return []types.Get{}
+      }
+      records , _ = db.Query(`SELECT fullname FROM biography WHERE idsuper =$1`,id)
+      _ = records.Next()  
+      _ = records.Scan(&super.FullName)
+      fmt.Println(super.FullName)
+
+      records , _ = db.Query(`SELECT intelligence, power FROM powerstats WHERE idsuper =$1`, id)  
+      _ = records.Next() 
+      _ = records.Scan(&super.Intelligence, &super.Power)
+      fmt.Println(super.Power)
+      
+      records , _ = db.Query(`SELECT occupation FROM work WHERE idsuper =$1`, id)  
+      _ = records.Next() 
+      _ = records.Scan(&super.Occupation)
+       fmt.Println(super.Occupation)
+      records , _ = db.Query(`SELECT url FROM image WHERE idsuper =$1`, id)  
+      _ = records.Next() 
+      _ = records.Scan(&super.Image)
+       fmt.Println(super.Image)  
+      records , _ = db.Query(`SELECT groupaffiliation, relatives FROM connections WHERE idsuper =$1`, id)  
+      _ = records.Next() 
+      _ = records.Scan(&super.GroupAffiliation, &super.Relatives) 
+       fmt.Println(super.GroupAffiliation)
+        fmt.Println(super.Relatives)
+      super.NumberOfRelatives = len(strings.Split(super.Relatives,","))       
+      dataSuper := make([]types.Get,0)
+      dataSuper = append(dataSuper, super)  
+      return dataSuper 
+    }
+      fmt.Println("Nonexistent id")
+      return []types.Get{}
 }
