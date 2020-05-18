@@ -4,19 +4,24 @@
 Pasta Principal é Super-Hero-Api/ , lá contém o arquivo (main.go) que é o arquivo para executar as chamadas de metódos (POST, GET, DELETE)
 
 -> Diretório Super-Hero-Api/Connections 
+
   Dentro do diretório contém o arquivos connections.go  que vai conectar a API(superheroapi.com) com o Banco de Dados (Postresql)
 
 -> Diretório Super-Hero-Api/Trash 
-  Alguns pedaços de códigos que forma algum momento usados no projeto
+ 
+ Alguns pedaços de códigos que forma algum momento usados no projeto
 
 -> Diretório Super-Hero-Api/db 
+
   contém o arquivo db.go que tem funções que de alguma forma vão manipular o Banco de Dados de alguma Maneira
 
 -> Diretório Super-Hero-Api/types
-   Contém o arquivo types.go que são os tipos usados ex:(types.Get usado para receber os dados do Banco)
+ 
+  Contém o arquivo types.go que são os tipos usados ex:(types.Get usado para receber os dados do Banco)
 
 # Funcionamento dos Arquivos
 # Caminho : /main/main.go
+
 O pakcage main tem acesso as funções GET POST e DELETE de connections.go, ou seja ela tem em mão os valores quando se dá algum  GET, só que por fins de aplicação eles não são usado. Apenas imprimimos na tela o que seria nos retornado, em contexto de aplicação completa teríamos acesso aos eventos que não vem ao caso. 
 
 
@@ -102,7 +107,7 @@ Requistos : Necessário criar um server/banco de dados com essas especificaçõe
  
  password      =  "eliabe1106"
  
- dbname        =  "super-hero"
+ dbname(data base name)        =  "super-hero"
 
 Para executar os testes basta ir na pasta Super-Hero-Api-Test 
 digite os comandos no terminal linux go run main.go ou go build main.go && ./main.go 
