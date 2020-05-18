@@ -16,6 +16,9 @@ Pasta Principal é Super-Hero-Api/ , lá contém o arquivo (main.go) que é o ar
    Contém o arquivo types.go que são os tipos usados ex:(types.Get usado para receber os dados do Banco)
 
 # Funcionamento dos Arquivos
+# Caminho : /main.go
+a função tem acesso as funções GET POST e DELETE de connections.go ou seja ela tem em mão os valores quando se dá algum  GET, só que por fins de aplicação eles não são usado. Apenas imprimimos na tela o que seria nos retornado, em contexto de aplicação completa teríamos acesso aos eventos que não vem ao caso 
+
 
 # Caminho: connections/connections.go 
 
@@ -27,8 +30,6 @@ imports de fora do projeto:
 
 "net/http" -> para fazer requisições do http da API(superheroapi.com)
 
-FUNÇõES:
-caminho :/main.go
 POST()-> Usadas para criar cadrastos não recebe nada como parâmetros. Recebe entradas de dados para dizer qual o nome do super para ser buscada na API(superheroapi.com) e ser cadrastado no banco chama a função Saving() passando os ids com o nome encontrados.
 
 GET(string) -> Recebe uma String com um parâmetro passada na main.go , retorna uma slice do tipo (type.Get) que estão contidos no (packages types no caminho types/types.go), caso for requisição for das tabelas (allsuper, heroes, villains)
@@ -105,6 +106,9 @@ Requistos : Necessário criar um server/banco de dados com essas especificaçõe
 
 Para executar os testes basta ir na pasta Super-Hero-Api-Test 
 digite os comandos no terminal linux go run main.go ou go build main.go && ./main.go 
+
+# Contatos
+eliabesantos1106@gmail.com
 
 # Execução Normal 
 Va na pasta Super-Hero-Api abra o arquivo main.go e escolha qual função irá executar e comente as outras, logo após digite os comandos no terminal linux go run main.go ou go build main.go && ./main.go.
