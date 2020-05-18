@@ -112,9 +112,6 @@ Requistos : Necessário criar um server/banco de dados com essas especificaçõe
 Para executar os testes basta ir na pasta Super-Hero-Api-Test 
 digite os comandos no terminal linux go run main.go ou go build main.go && ./main.go 
 
-# Contatos
-eliabesantos1106@gmail.com
-
 # Execução Normal 
 Va na pasta Super-Hero-Api abra o arquivo main.go e escolha qual função irá executar e comente as outras, logo após digite os comandos no terminal linux go run main.go ou go build main.go && ./main.go.
 
@@ -123,4 +120,7 @@ go version go1.14.2 linux/amd64
 
 Postresql 12
 
-Sistema Operacional: linux
+Sistema Operacional: linux Ubuntu 18.4
+
+# Contatos
+eliabesantos1106@gmail.com
