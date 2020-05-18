@@ -92,5 +92,5 @@ Va na pasta Super-Hero-Api abra o arquivo main.go e escolha qual função irá e
 
 # Especificações
 go version go1.14.2 linux/amd64
-postresql 12
+Postresql 12
 Sistema Operacional: linux
