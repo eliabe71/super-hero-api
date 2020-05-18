@@ -82,7 +82,13 @@ SearchSuperName() -> recebe o nome na sua chamada em connections.go e vai pesqui
 erasingTheSuper() recebe dois parâmetros db *sql.DB, id int) db para ter o acesso as funções de manipulção do banco e o id para remover todos os atributos do super com aquele id, esssa função elimina cada atributo de todas as tabelas.
 
 # Teste 
-Para os teste alterei a função POST na main.go para que ela receba parâmetros e criei um package testes criei uma nova pasta para não alterá a ideia original. O diretório dos teste é Super-Hero-Api-Test, nele estou adicionando 200 Super's fazendos requisições Diretamente da API e adicionando  No Banco de Dados, logo após dou os todos os tipos de GET e por fim apago tudo.
+Para os teste alterei a função POST na main.go para que ela receba parâmetros e criei um package testes, dentro dele uma função que retorna uma slice com os 50 primeiros super da APi e essa slice é usada para testar o funcionamento da das funções no package main. O diretório dos teste é Super-Hero-Api-Test, nele estou adicionando 50 Super's fazendos requisições Diretamente da API e adicionando  No Banco de Dados, logo após dou os todos os tipos de GET e por fim apago tudo.
+# Alterações nas Funções 
+  POST(name string) -> passou agora a receber um nome para entrada de dados e ir  direto  para o cadrasto
+   
+   GET(who string,nameodId string, i int) -> passou a ter 3 parametros, who serve para indicar se é para fazer por nome ou id ou se é para buscar por tabelas , i se for 1 é busca por id e se  for 2 é por nome, nomeOrId é o parâmetro de acordo com o valor de i
+
+DELETE(who string) -> continuo recebendo um parâmetro só que no funcionamento se who !="all" , o valor de who sera procurado nas tabelas e  eliminado.
 
 Execução dos Testes 
 Requistos : Necessário criar um server/banco de dados com essas especificações
