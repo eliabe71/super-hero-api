@@ -16,8 +16,8 @@ Pasta Principal é Super-Hero-Api/ , lá contém o arquivo (main.go) que é o ar
    Contém o arquivo types.go que são os tipos usados ex:(types.Get usado para receber os dados do Banco)
 
 # Funcionamento dos Arquivos
-# Caminho : /main.go
-a função tem acesso as funções GET POST e DELETE de connections.go ou seja ela tem em mão os valores quando se dá algum  GET, só que por fins de aplicação eles não são usado. Apenas imprimimos na tela o que seria nos retornado, em contexto de aplicação completa teríamos acesso aos eventos que não vem ao caso 
+# Caminho : /main/main.go
+O pakcage main tem acesso as funções GET POST e DELETE de connections.go, ou seja ela tem em mão os valores quando se dá algum  GET, só que por fins de aplicação eles não são usado. Apenas imprimimos na tela o que seria nos retornado, em contexto de aplicação completa teríamos acesso aos eventos que não vem ao caso. 
 
 
 # Caminho: connections/connections.go 
