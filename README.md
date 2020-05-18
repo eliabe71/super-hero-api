@@ -30,11 +30,15 @@ POST()-> Usadas para criar cadrastos não recebe nada como parâmetros. Recebe e
 
 GET(string) -> Recebe uma String com um parâmetro passada na main.go , retorna uma slice do tipo (type.Get) que estão contidos no (packages types no caminho types/types.go), caso for requisição for das tabelas (allsuper, heroes, villains)
 os únicos valores válidos na estrutura (type.Get) são Id e Name.
+
 GET(villains) retornar apenas os vilões 
+
 GET(heroes) retornar apenas os heróis 
+
 GET(allsupers) retonar todos os Supers  cadrastados
 
 DELETE()-> Recebe uma String já definido na main.go caso string recebida seja "all" todas as tabelas do Banco de Dados serão Destruídas. Caso for "name", então será necessária entrada de dados para dizer qual Super será excluir. 
+
 DELETE("all") -> destrói tudo
 
 # Caminho: db/db.go
