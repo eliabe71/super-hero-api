@@ -86,11 +86,17 @@ Para os teste alterei a função POST na main.go para que ela receba parâmetros
 
 Execução dos Testes 
 Requistos : Necessário criar um server/banco de dados com essas especificações
-  host          =  "localhost"
-  port          =  5432
-  user          =  "postgres"
-  password      =  "eliabe1106"
-  dbname        =  "super-hero"
+ 
+ host          =  "localhost"
+ 
+ port          =  5432
+ 
+ user          =  "postgres"
+ 
+ password      =  "eliabe1106"
+ 
+ dbname        =  "super-hero"
+
 Para executar os testes basta ir na pasta Super-Hero-Api-Test 
 digite os comandos no terminal linux go run main.go ou go build main.go && ./main.go 
 
