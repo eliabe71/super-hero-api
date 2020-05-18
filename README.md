@@ -82,7 +82,7 @@ SearchSuperName() -> recebe o nome na sua chamada em connections.go e vai pesqui
 erasingTheSuper() recebe dois parâmetros db *sql.DB, id int) db para ter o acesso as funções de manipulção do banco e o id para remover todos os atributos do super com aquele id, esssa função elimina cada atributo de todas as tabelas.
 
 # Teste 
-Para os teste alterei a função POST na main.go para que ela receba parâmetros e criei um package testes criei uma nova pasta para não alterá a ideia original caminho dos teste é Super-Hero-Api-Test, nele estou adicionando 200 Super's No Banco de Dados, logo após dou os todos os tipos de GET e por fim apago tudo.
+Para os teste alterei a função POST na main.go para que ela receba parâmetros e criei um package testes criei uma nova pasta para não alterá a ideia original. O diretório dos teste é Super-Hero-Api-Test, nele estou adicionando 200 Super's fazendos requisições Diretamente da API e adicionando  No Banco de Dados, logo após dou os todos os tipos de GET e por fim apago tudo.
 
 Execução dos Testes 
 Requistos : Necessário criar um server/banco de dados com essas especificações
