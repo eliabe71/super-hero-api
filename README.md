@@ -20,8 +20,11 @@ Pasta Principal é Super-Hero-Api/ , lá contém o arquivo (main.go) que é o ar
 # Caminho: connections/connections.go 
 
 imports de fora do projeto:
+
 "io/ioutill" -> usado para ler o json da API(superheroapi.com) 
+
 "fmt" -> padrão para input/output
+
 "net/http" -> para fazer requisições do http da API(superheroapi.com)
 
 FUNÇõES:
@@ -96,5 +99,7 @@ Va na pasta Super-Hero-Api abra o arquivo main.go e escolha qual função irá e
 
 # Especificações
 go version go1.14.2 linux/amd64
+
 Postresql 12
+
 Sistema Operacional: linux
